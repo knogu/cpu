@@ -82,7 +82,7 @@ module m_proc3(w_clk, w_a0);
   wire w_r, w_i, w_s, w_b, w_u, w_j, w_ld;
   reg [31:0] r_pc = 0;
   m_pc_adder pc_adder (32'h4, r_pc, w_npc);
-  m_am_imem m3 (r_pc, w_inst);
+  imem m3 (r_pc[7:2], w_clk, w_inst);
   m_gen_imm m4 (w_inst, w_imm, w_r, w_i, w_s, w_b, w_u, w_j, w_ld);
   m_RF rf(w_clk, w_inst[19:15], w_inst[24:20], w_rs1_val, w_rs2_val,
            w_inst[11:7], 1'b1, w_alu_out, w_a0);
