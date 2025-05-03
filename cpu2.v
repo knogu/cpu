@@ -76,7 +76,7 @@ module m_gen_imm(w_ir, w_imm, w_r, w_i, w_s, w_b, w_u, w_j, w_ld);
 endmodule
 
 module clk_div2(input wire clk, output reg clk_div);
-  always @(posedge clk or posedge rst) begin
+  always @(posedge clk) begin
     clk_div <= ~clk_div;
   end
 endmodule
