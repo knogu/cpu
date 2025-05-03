@@ -13,16 +13,13 @@ endmodule
 module m_am_imem(w_pc, w_insn);
   input  wire [31:0] w_pc;
   output wire [31:0] w_insn;
-  // reg [31:0] mem [0:63]; /* synthesis ram_init_file = "imem.mif" */
+  reg [31:0] mem [0:63]; /* synthesis ram_init_file = "imem.mif" */
   // assign w_insn = mem[w_pc[7:2]];
-  always @(*) begin
-    case (w_pc)
-      32'd0:   w_insn = {12'd3, 5'd0, 3'd0, 5'd1, 7'h13};       // addi x1, x0, 3
-      32'd4:   w_insn = {12'd4, 5'd1, 3'd0, 5'd2, 7'h13};       // addi x2, x1, 4
-      32'd8:   w_insn = {12'd5, 5'd2, 3'd0, 5'd10, 7'h13};      // addi x10, x2, 5
-      default: w_insn = {12'd0, 5'd0, 3'd0, 5'd0, 7'b0110011};;  // それ以外はNOP（または空命令）
-    endcase
-  end
+  assign w_insn = 
+    (w_pc == 0) ? {12'd3,5'd0,3'd0,5'd1,7'h13} :
+    (w_pc == 4) ? {12'd4,5'd1,3'd0,5'd2,7'h13} :
+    (w_pc == 8) ? {12'd5,5'd2,3'd0,5'd10,7'h13} :
+    {12'd0,5'd0,3'd0,5'b0,7'b0110011};
 //   integer i; initial for (i=0; i<64; i=i+1) mem[i] = 32'd0;
 endmodule
 
