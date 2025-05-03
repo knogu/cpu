@@ -93,10 +93,9 @@ module m_proc3(w_clk, w_a0);
   imem m3 (r_pc[7:2], w_clk, w_inst);
   m_gen_imm m4 (w_inst, w_imm, w_r, w_i, w_s, w_b, w_u, w_j, w_ld);
   m_RF rf(w_clk2, w_inst[19:15], w_inst[24:20], w_rs1_val, w_rs2_val,
-           w_inst[11:7], 1'b1, w_alu_out, dummy);
+           w_inst[11:7], 1'b1, w_alu_out, w_a0);
   m_mux m6 (w_rs2_val, w_imm, w_i, w_s2);
   m_adder m7 (w_rs1_val, w_s2, w_alu_out);
-  assign a0=w_inst;
   always @(posedge w_clk2) r_pc <= w_npc;
 endmodule
 
