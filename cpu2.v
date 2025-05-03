@@ -13,7 +13,7 @@ endmodule
 module m_am_imem(w_pc, w_insn);
   input  wire [31:0] w_pc;
   output wire [31:0] w_insn;
-  reg [31:0] mem [0:63]; /* synthesis ram_init_file = "imem.mif" */
+  reg [31:0] mem [0:63] /* synthesis ram_init_file = "imem.mif" */;
   assign w_insn = mem[w_pc[7:2]];
   // assign w_insn = 
   //   (w_pc == 0) ? {12'd3,5'd0,3'd0,5'd1,7'h13} :
